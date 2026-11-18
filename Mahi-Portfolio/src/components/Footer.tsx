@@ -1,46 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { PageRoute } from '../types';
 import { FEATURED_PROJECTS } from '../data/featuredProjects';
-import { CONTACT_FORM_ID, SCROLL_TO_FORM_KEY } from '../pages/ContactPage';
+import { CONTACT_DETAILS_ID, CONTACT_EMAIL, CONTACT_PHONE, SCROLL_TO_DETAILS_KEY } from '../pages/ContactPage';
 import { smoothScrollTo } from '../lib/motion';
 
 interface FooterProps {
   onNavigate: (route: PageRoute) => void;
-  onReplayPreloader: () => void;
+  onReplayPreloader?: () => void;
   onCursorChange?: (state: 'default' | 'link' | 'drag-3d' | 'view' | 'copy') => void;
 }
 
-const EMAIL = 'mahipatel1329@gmail.com';
+const CV_HREF = '/Mahi_Patel_CV.pdf';
 
-const EXPERTISE = [
-  'Residential Interiors',
-  'Retail & Brand Spaces',
-  'Hospitality Design',
-  'Adaptive Reuse',
-  '3D Visualisation',
-  'Working Drawings & Detailing',
-];
+/** Title-case names for the plan (the project data stores some in capitals). */
+const PROJECT_LABELS: Record<string, string> = {
+  'urben-hatch': 'Urben Hatch',
+  'royce-store': 'Royce’',
+  villa: 'Villa',
+  miscellaneous: 'Miscellaneous',
+};
 
-const SOCIALS = [
-  { label: 'LinkedIn', href: 'https://linkedin.com' },
-  { label: 'Instagram', href: 'https://instagram.com' },
-  { label: 'Behance', href: 'https://behance.net' },
-];
-
-/** Content page remembers the selected project under this key (see WorkPage). */
-const ACTIVE_PROJECT_KEY = 'mahi_content_active_project';
-
-export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, onCursorChange }) => {
+/**
+ * "The Studio Plan" footer: a small floor plan drawn in the site's line language.
+ * Each room is a page — Projects, About, the CV library — and Contact is the
+ * entrance, whose door swings open on hover. The email runs along the dimension
+ * line. On phones the rooms stack into a tall plan.
+ */
+export const Footer: React.FC<FooterProps> = ({ onNavigate, onCursorChange }) => {
   const [studioTime, setStudioTime] = useState('');
 
   useEffect(() => {
     const update = () =>
       setStudioTime(
-        new Date().toLocaleTimeString('en-GB', {
-          hour: '2-digit',
-          minute: '2-digit',
-          timeZone: 'Asia/Kolkata',
-        })
+        new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' })
       );
     update();
     const id = setInterval(update, 30_000);
@@ -52,170 +44,169 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, o
     onMouseLeave: () => onCursorChange?.('default'),
   };
 
-  /** Scroll to the contact form if it's on screen, otherwise open the Contact page at the form. */
-  const goToContactForm = () => {
-    const form = document.getElementById(CONTACT_FORM_ID);
-    if (form) return smoothScrollTo(form);
+  /** Scroll to the contact details if they're on screen, otherwise open the Contact page at them. */
+  const goToContact = () => {
+    const details = document.getElementById(CONTACT_DETAILS_ID);
+    if (details) return smoothScrollTo(details);
     try {
-      sessionStorage.setItem(SCROLL_TO_FORM_KEY, '1');
+      sessionStorage.setItem(SCROLL_TO_DETAILS_KEY, '1');
     } catch {}
     onNavigate({ name: 'contact' });
   };
 
-  const openProject = (slug: string, index: number) => {
-    if (slug === 'royce-store') return onNavigate({ name: 'royce' });
-    if (slug === 'urben-hatch') return onNavigate({ name: 'work-detail', slug: 'urben-hatch' });
-    if (slug === 'villa') return onNavigate({ name: 'work-detail', slug: 'villa' });
-    try {
-      sessionStorage.setItem(ACTIVE_PROJECT_KEY, String(index));
-    } catch {}
-    onNavigate({ name: 'work' });
-  };
+  const openProject = (slug: string) =>
+    slug === 'royce-store' ? onNavigate({ name: 'royce' }) : onNavigate({ name: 'work-detail', slug });
 
-  const studioLinks: { label: string; route: PageRoute }[] = [
-    { label: 'Projects', route: { name: 'work' } },
-    { label: 'About', route: { name: 'about' } },
-    { label: 'Contact', route: { name: 'contact' } },
-  ];
-
-  const heading = 'font-mono-code text-[10px] uppercase tracking-[0.22em] text-[#C9A47E] mb-4';
-  const link = 'text-left py-1.5 md:py-0 text-[#D9D4CA] hover:text-white transition-colors duration-300';
+  // Shared room styling: hairline-weight walls come from the plan's borders; the
+  // room fills with a 45° material hatch on hover / keyboard focus.
+  const room =
+    'group/room relative min-w-0 p-5 md:p-6 text-left transition-[background] duration-500 outline-none ' +
+    'hover:[background:repeating-linear-gradient(45deg,#EFE6D8_0_1px,transparent_1px_9px)] ' +
+    'focus-within:[background:repeating-linear-gradient(45deg,#EFE6D8_0_1px,transparent_1px_9px)]';
+  const roomNo = 'block font-mono-code text-[10px] uppercase tracking-[0.22em] text-[#7A7770]';
+  const roomName =
+    'mt-2 block font-display text-3xl md:text-[2.1rem] leading-none text-[#141413] transition-colors duration-300 group-hover/room:text-[#9A773E]';
+  const wall = 'border-[#2A2724]';
 
   return (
-    <footer id="main-footer" className="relative z-20 bg-[#141413] text-[#A8A399] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        {/* Call to action */}
-        <div className="pt-12 md:pt-16 pb-10 md:pb-12 grid gap-8 md:grid-cols-12 md:items-end border-b border-white/10">
-          <div className="md:col-span-8">
-            <p className="font-mono-code text-[10px] uppercase tracking-[0.22em] text-[#C9A47E] mb-4">
-              Commissions · Internships · Collaborations
+    <footer id="main-footer" className="relative z-20 bg-[#F6F2EB] text-[#141413] border-t border-[#E5E3DD]">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 pt-14 md:pt-16 pb-8">
+        {/* Heading */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 md:mb-10">
+          <div>
+            <p className="font-mono-code text-[10px] uppercase tracking-[0.22em] text-[#9A773E]">
+              Internships · Commissions · Collaborations
             </p>
-            <h2 className="font-display font-light text-[#F4F1EA] text-3xl sm:text-4xl leading-[1.1] tracking-tight">
-              Let’s shape spaces
-              <br />
-              <span className="italic text-[#C9A47E]">that feel considered.</span>
+            <h2 className="mt-3 font-display text-4xl md:text-5xl leading-[1.02] text-[#141413]">
+              Come in, <span className="italic text-[#9A773E]">the door is open.</span>
             </h2>
           </div>
-          <div className="md:col-span-4 md:justify-self-end w-full md:w-auto">
-            <button
-              type="button"
-              onClick={goToContactForm}
-              {...hover}
-              className="group w-full md:w-auto inline-flex items-center justify-center md:justify-start gap-4 rounded-full border border-[#C9A47E]/60 px-6 py-4 md:py-3 text-sm text-[#F4F1EA] transition-colors duration-300 hover:bg-[#C9A47E] hover:text-[#141413]"
-            >
-              Start a conversation
-              <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </button>
-            <a href={`mailto:${EMAIL}`} {...hover} className="mt-4 md:mt-3 block text-center md:text-left text-sm text-[#D9D4CA] hover:text-white transition-colors">
-              {EMAIL}
-            </a>
-          </div>
+          <p className="font-mono-code text-[10px] uppercase tracking-[0.22em] text-[#7A7770]">
+            Studio plan · Scale 1 : 50
+          </p>
         </div>
 
-        {/* Columns */}
-        <div className="py-10 md:py-12 grid grid-cols-2 gap-y-9 gap-x-6 md:gap-y-10 md:gap-x-8 md:grid-cols-12 text-sm">
-          <div className="col-span-2 md:col-span-4 md:pr-10 order-1 md:order-none">
-            <div className="font-display text-xl text-[#F4F1EA] font-light mb-4">Mahi Patel</div>
-            <p className="leading-relaxed text-[#A8A399] max-w-sm">
-              Interior &amp; spatial designer based in Ahmedabad, crafting retail, hospitality and residential
-              interiors grounded in material honesty, light and the way people move through space.
-            </p>
-            <div className="mt-5 inline-flex items-center gap-2 text-xs text-[#C9A47E]">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-[#C9A47E] opacity-60 animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#C9A47E]" />
-              </span>
-              Available for internships &amp; studio collaborations
-            </div>
-          </div>
-
-          <nav className="md:col-span-3 order-2 md:order-none" aria-label="Selected projects">
-            <h3 className={heading}>Selected Work</h3>
-            <ul className="space-y-2.5">
-              {FEATURED_PROJECTS.map((p, i) => (
+        {/* The plan */}
+        <nav
+          aria-label="Footer"
+          className={`relative grid grid-cols-1 md:grid-cols-12 border-[3px] ${wall} bg-[#FFFFFF]`}
+        >
+          {/* Room 01 · Projects (tall, left) */}
+          <div className={`${room} md:col-span-5 md:row-span-2 border-b-2 md:border-b-0 md:border-r-2 ${wall}`}>
+            <button type="button" onClick={() => onNavigate({ name: 'work' })} {...hover} className="block text-left outline-none">
+              <span className={roomNo}>Room 01</span>
+              <span className={roomName}>Projects</span>
+            </button>
+            <ul className="mt-6 space-y-2">
+              {FEATURED_PROJECTS.map((p) => (
                 <li key={p.slug}>
-                  <button onClick={() => openProject(p.slug, i)} {...hover} className={`${link} group flex items-baseline gap-3`}>
-                    <span className="font-mono-code text-[10px] text-[#6E6A62] group-hover:text-[#C9A47E] transition-colors">
-                      {p.number}
+                  <button
+                    type="button"
+                    onClick={() => openProject(p.slug)}
+                    {...hover}
+                    className="group/p inline-flex items-baseline gap-3 text-[0.95rem] text-[#55534D] hover:text-[#141413] transition-colors outline-none focus-visible:text-[#9A773E]"
+                  >
+                    <span className="font-mono-code text-[10px] text-[#9A773E] tabular-nums">{p.number}</span>
+                    <span className="border-b border-transparent group-hover/p:border-[#141413]/40 transition-colors">
+                      {PROJECT_LABELS[p.slug] ?? p.name}
                     </span>
-                    <span className="capitalize">{p.name.replace('’', '').toLowerCase()}</span>
                   </button>
                 </li>
               ))}
             </ul>
-          </nav>
-
-          <div className="col-span-2 md:col-span-3 order-4 md:order-none">
-            <h3 className={heading}>Expertise</h3>
-            <ul className="flex flex-wrap gap-2 md:block md:space-y-2.5 text-[#D9D4CA]">
-              {EXPERTISE.map((e) => (
-                <li
-                  key={e}
-                  className="rounded-full border border-white/15 px-3.5 py-1.5 text-xs md:rounded-none md:border-0 md:p-0 md:text-sm"
-                >
-                  {e}
-                </li>
-              ))}
-            </ul>
+            {/* doorway into the hall (desktop) */}
+            <span aria-hidden="true" className="hidden md:block absolute -right-[2px] bottom-14 h-12 w-[2px] bg-[#FFFFFF]" />
           </div>
 
-          <div className="max-md:contents md:col-span-2 md:space-y-8">
-            <nav aria-label="Studio" className="order-3 md:order-none">
-              <h3 className={heading}>Studio</h3>
-              <ul className="space-y-2.5">
-                {studioLinks.map((l) => (
-                  <li key={l.label}>
-                    <button onClick={() => onNavigate(l.route)} {...hover} className={link}>
-                      {l.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <div className="col-span-2 order-5 md:order-none max-md:border-t max-md:border-white/10 max-md:pt-8">
-              <h3 className={heading}>Follow</h3>
-              <ul className="flex flex-wrap gap-x-7 gap-y-1 md:block md:space-y-2.5">
-                {SOCIALS.map((s) => (
-                  <li key={s.label}>
-                    <a href={s.href} target="_blank" rel="noreferrer" {...hover} className={`${link} inline-flex items-center gap-1.5`}>
-                      {s.label}
-                      <span aria-hidden="true" className="text-[10px]">↗</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+          {/* Room 02 · About */}
+          <button
+            type="button"
+            onClick={() => onNavigate({ name: 'about' })}
+            {...hover}
+            className={`${room} md:col-span-3 border-b-2 md:border-r-2 ${wall}`}
+          >
+            <span className={roomNo}>Room 02</span>
+            <span className={roomName}>About</span>
+            <span className="mt-3 block text-sm text-[#6E6C65]">Mahi Patel · Indus Design School, 2027</span>
+          </button>
 
-      </div>
+          {/* Room 03 · Library (CV) */}
+          <a
+            href={CV_HREF}
+            download="Mahi_Patel_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            {...hover}
+            className={`${room} md:col-span-4 border-b-2 ${wall}`}
+          >
+            <span className={roomNo}>Room 03 · Library</span>
+            <span className={roomName}>Download CV</span>
+            <span className="mt-3 block text-sm text-[#6E6C65]">PDF · 251 KB ↓</span>
+          </a>
 
-      {/* Oversized wordmark */}
-      <div aria-hidden="true" className="select-none px-4 md:px-8 leading-none">
-        <div className="font-display font-light text-[#F4F1EA]/[0.06] text-center tracking-tight whitespace-nowrap text-[17vw] md:text-[7vw] pb-[1vw] md:pb-[0.5vw]">
-          MAHI PATEL
-        </div>
-      </div>
+          {/* Entrance · Contact (door in the outer wall) */}
+          <button
+            type="button"
+            onClick={goToContact}
+            {...hover}
+            className={`${room} md:col-span-7 min-h-[150px] md:min-h-[170px]`}
+            aria-label="Contact — open the contact details"
+          >
+            <span className={roomNo}>Entrance</span>
+            <span className={roomName}>Contact</span>
+            <span className="mt-3 block text-sm text-[#6E6C65]">Walk in for internships &amp; collaborations</span>
 
-      {/* Bottom bar */}
-      <div className="relative border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left text-[11px] text-[#6E6A62]">
-          <span>© {new Date().getFullYear()} Mahi Patel — Interior &amp; Spatial Design</span>
-          <span>Ahmedabad, India · {studioTime || '--:--'} IST</span>
-          <div className="flex items-center gap-6 pt-1 sm:pt-0">
-            <button onClick={onReplayPreloader} {...hover} className="py-2 sm:py-0 hover:text-[#C9A47E] transition-colors">
-              Replay intro
-            </button>
-            <button
-              onClick={() => smoothScrollTo(document.body, 0)}
-              {...hover}
-              className="py-2 sm:py-0 inline-flex items-center gap-1.5 hover:text-[#C9A47E] transition-colors"
+            {/* door opening in the bottom wall, with leaf + swing arc */}
+            <span aria-hidden="true" className="absolute right-[18%] -bottom-[3px] h-[3px] w-16 bg-[#F6F2EB]" />
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 64 64"
+              className="absolute right-[18%] -bottom-[1px] h-16 w-16 overflow-visible"
             >
-              Back to top <span aria-hidden="true">↑</span>
-            </button>
-          </div>
+              {/* swing arc centred on the hinge (bottom-left) */}
+              <path d="M64 64 A64 64 0 0 0 0 0" fill="none" stroke="#9A773E" strokeWidth="1" strokeDasharray="3 4" />
+              <line
+                x1="0"
+                y1="64"
+                x2="64"
+                y2="64"
+                stroke="#9A773E"
+                strokeWidth="3"
+                className="origin-[0px_64px] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/room:-rotate-[80deg] group-focus-visible/room:-rotate-[80deg]"
+              />
+            </svg>
+          </button>
+        </nav>
+
+        {/* Dimension line carrying the email */}
+        <div className="relative mt-5 flex items-center" aria-label="Email">
+          <span className="h-3 w-px bg-[#9A773E]" aria-hidden="true" />
+          <span className="h-px flex-1 bg-[#9A773E]" aria-hidden="true" />
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            {...hover}
+            className="px-4 font-sans text-sm md:text-base text-[#141413] hover:text-[#9A773E] transition-colors whitespace-nowrap"
+          >
+            {CONTACT_EMAIL}
+          </a>
+          <span className="h-px flex-1 bg-[#9A773E]" aria-hidden="true" />
+          <span className="h-3 w-px bg-[#9A773E]" aria-hidden="true" />
+        </div>
+
+        {/* Bottom line */}
+        <div className="mt-10 pt-5 border-t border-[#E2DBCF] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-[#6E6C65]">
+          <span>© {new Date().getFullYear()} Mahi Patel · Interior &amp; Spatial Design</span>
+          <span className="tabular-nums">
+            Ahmedabad · {studioTime || '--:--'} IST · <a href={`tel:+919737158840`} {...hover} className="hover:text-[#141413] transition-colors">{CONTACT_PHONE}</a>
+          </span>
+          <button
+            type="button"
+            onClick={() => smoothScrollTo(document.body, 0)}
+            {...hover}
+            className="self-start sm:self-auto inline-flex items-center gap-1.5 hover:text-[#141413] transition-colors"
+          >
+            Back to top <span aria-hidden="true">↑</span>
+          </button>
         </div>
       </div>
     </footer>

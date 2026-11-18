@@ -11,6 +11,7 @@ import { SpaceDetailPage } from './pages/SpaceDetailPage';
 import { RoyceProjectPage } from './pages/RoyceProjectPage';
 import { UrbenHatchProjectPage } from './pages/UrbenHatchProjectPage';
 import { VillaProjectPage } from './pages/VillaProjectPage';
+import { MiscellaneousProjectPage } from './pages/MiscellaneousProjectPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { LayoutGroup } from 'motion/react';
@@ -55,7 +56,8 @@ const getInitialRoute = (): PageRoute => {
     if (hash === 'villa' || path === '/villa') {
       return { name: 'work-detail', slug: 'villa' };
     }
-    if (hash.startsWith('work/') || hash.startsWith('spaces/')) {
+    // In-app navigation writes `#/work-detail/<slug>`; shared links may use `#/work/<slug>`
+    if (hash.startsWith('work/') || hash.startsWith('work-detail/') || hash.startsWith('spaces/')) {
       const parts = hash.split('/');
       if (parts[1]) {
         if (parts[1] === 'royce' || parts[1] === 'royce-store') {
@@ -77,7 +79,10 @@ const getInitialRoute = (): PageRoute => {
 export default function App() {
   const [preloaderComplete, setPreloaderComplete] = useState(false);
   const [route, setRoute] = useState<PageRoute>(getInitialRoute);
-  const routeKey = `${route.name}:${'slug' in route ? route.slug : ''}`;
+  // Bumped on every in-app navigation so the page remounts fresh even when the
+  // route is unchanged (e.g. logo → Home while a project is open inside Home).
+  const [navCount, setNavCount] = useState(0);
+  const routeKey = `${route.name}:${'slug' in route ? route.slug : ''}:${navCount}`;
   useSmoothScroll();
   useScrollReveal(routeKey);
   const [mode, setMode] = useState<DisciplineMode>('interior');
@@ -87,6 +92,7 @@ export default function App() {
   // Scroll to top on navigation change & sync document title
   const handleNavigate = (newRoute: PageRoute) => {
     setRoute(newRoute);
+    setNavCount((n) => n + 1);
     scrollToTop();
     setCursorState('default');
     setCursorText(undefined);
@@ -132,6 +138,8 @@ export default function App() {
           document.title = 'URBEN HATCH — Adaptive Reuse Hostel Hotel — Mahi Patel';
         } else if ('slug' in route && route.slug === 'villa') {
           document.title = 'Villa — Residential Interior Design — Mahi Patel';
+        } else if ('slug' in route && route.slug === 'miscellaneous') {
+          document.title = 'Miscellaneous — Studio Works & Model Making — Mahi Patel';
         } else {
           document.title = 'Project Detail — Mahi Patel';
         }
@@ -147,6 +155,14 @@ export default function App() {
         break;
     }
   }, [route]);
+
+  /** Open a project from the carousel order (prev/next links on project pages). */
+  const openFeaturedProject = (i: number) => {
+    const slug = FEATURED_PROJECTS[i]?.slug;
+    if (slug === 'royce-store') handleNavigate({ name: 'royce' });
+    else if (slug) handleNavigate({ name: 'work-detail', slug });
+    else handleNavigate({ name: 'work' });
+  };
 
   const handleReplayPreloader = () => {
     sessionStorage.removeItem('mahi_portfolio_visited');
@@ -211,18 +227,7 @@ export default function App() {
             <RoyceProjectPage
               onNavigate={handleNavigate}
               onBack={() => handleNavigate({ name: 'work' })}
-              onOpenProject={(i) => {
-                const slug = FEATURED_PROJECTS[i]?.slug;
-                if (slug === 'royce-store') {
-                  handleNavigate({ name: 'royce' });
-                } else if (slug === 'urben-hatch') {
-                  handleNavigate({ name: 'work-detail', slug: 'urben-hatch' });
-                } else if (slug === 'villa') {
-                  handleNavigate({ name: 'work-detail', slug: 'villa' });
-                } else {
-                  handleNavigate({ name: 'work' });
-                }
-              }}
+              onOpenProject={openFeaturedProject}
               onCursorChange={handleCursorChange}
             />
           )}
@@ -231,18 +236,7 @@ export default function App() {
             <UrbenHatchProjectPage
               onNavigate={handleNavigate}
               onBack={() => handleNavigate({ name: 'work' })}
-              onOpenProject={(i) => {
-                const slug = FEATURED_PROJECTS[i]?.slug;
-                if (slug === 'royce-store') {
-                  handleNavigate({ name: 'royce' });
-                } else if (slug === 'urben-hatch') {
-                  handleNavigate({ name: 'work-detail', slug: 'urben-hatch' });
-                } else if (slug === 'villa') {
-                  handleNavigate({ name: 'work-detail', slug: 'villa' });
-                } else {
-                  handleNavigate({ name: 'work' });
-                }
-              }}
+              onOpenProject={openFeaturedProject}
               onCursorChange={handleCursorChange}
             />
           )}
@@ -251,23 +245,21 @@ export default function App() {
             <VillaProjectPage
               onNavigate={handleNavigate}
               onBack={() => handleNavigate({ name: 'work' })}
-              onOpenProject={(i) => {
-                const slug = FEATURED_PROJECTS[i]?.slug;
-                if (slug === 'royce-store') {
-                  handleNavigate({ name: 'royce' });
-                } else if (slug === 'urben-hatch') {
-                  handleNavigate({ name: 'work-detail', slug: 'urben-hatch' });
-                } else if (slug === 'villa') {
-                  handleNavigate({ name: 'work-detail', slug: 'villa' });
-                } else {
-                  handleNavigate({ name: 'work' });
-                }
-              }}
+              onOpenProject={openFeaturedProject}
               onCursorChange={handleCursorChange}
             />
           )}
 
-          {(route.name === 'space-detail' || (route.name === 'work-detail' && route.slug !== 'royce' && route.slug !== 'royce-store' && route.slug !== 'urben-hatch' && route.slug !== 'urbenhatch' && route.slug !== 'villa')) && (
+          {route.name === 'work-detail' && route.slug === 'miscellaneous' && (
+            <MiscellaneousProjectPage
+              onNavigate={handleNavigate}
+              onBack={() => handleNavigate({ name: 'work' })}
+              onOpenProject={openFeaturedProject}
+              onCursorChange={handleCursorChange}
+            />
+          )}
+
+          {(route.name === 'space-detail' || (route.name === 'work-detail' && route.slug !== 'royce' && route.slug !== 'royce-store' && route.slug !== 'urben-hatch' && route.slug !== 'urbenhatch' && route.slug !== 'villa' && route.slug !== 'miscellaneous')) && (
             <SpaceDetailPage
               slug={'slug' in route ? route.slug : 'house-of-seven-lightwells'}
               onNavigate={handleNavigate}

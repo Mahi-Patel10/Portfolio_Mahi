@@ -7,6 +7,7 @@ import { ProjectDetail } from '../components/projects/ProjectDetail';
 import { RoyceProjectPage } from './RoyceProjectPage';
 import { UrbenHatchProjectPage } from './UrbenHatchProjectPage';
 import { VillaProjectPage } from './VillaProjectPage';
+import { MiscellaneousProjectPage } from './MiscellaneousProjectPage';
 import { PixelTransition, PixelTransitionHandle } from '../components/projects/PixelTransition';
 
 interface WorkPageProps {
@@ -124,6 +125,13 @@ export const WorkPage: React.FC<WorkPageProps> = ({
           />
         ) : FEATURED_PROJECTS[detailIndex].slug === 'villa' ? (
           <VillaProjectPage
+            onBack={closeDetail}
+            onNavigate={onNavigate}
+            onOpenProject={(i) => openProject(i)}
+            onCursorChange={onCursorChange}
+          />
+        ) : FEATURED_PROJECTS[detailIndex].slug === 'miscellaneous' ? (
+          <MiscellaneousProjectPage
             onBack={closeDetail}
             onNavigate={onNavigate}
             onOpenProject={(i) => openProject(i)}

@@ -84,11 +84,16 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     name: 'Miscellaneous',
     type: 'Selected Works',
     description:
-      'A collection of miscellaneous design works and studies. (Placeholder description — replace with project details.)',
+      'Smaller studio works alongside the main projects: hand-built physical models, a Japanese-inspired bamboo partition wall, a mosaic staircase with a lotus pond beneath its landing, and a satin-and-pearl retail window display.',
     modelKey: 'thesis-bar',
-    images: [],
+    images: [
+      { src: '/projects/miscellaneous/model-02.jpg', caption: '01 · Model Making — Gallery room model' },
+      { src: '/projects/miscellaneous/partition-model-01.jpg', caption: '02 · Partition Wall — Bamboo, timber & ink landscape scroll' },
+      { src: '/projects/miscellaneous/staircase-render-01-hd.jpg', caption: '03 · Staircase Design — Mosaic steps & lotus pond' },
+      { src: '/projects/miscellaneous/window-display-hd.jpg', caption: '04 · Window Display — Satin, pearls & roses' },
+    ],
     details: [
-      { label: 'Category', value: 'Miscellaneous' },
+      { label: 'Works', value: 'Models · Partition · Staircase · Window Display' },
       { label: 'Discipline', value: 'Interior & Spatial Design' },
     ],
   },
