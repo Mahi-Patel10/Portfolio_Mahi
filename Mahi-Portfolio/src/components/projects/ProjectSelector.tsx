@@ -197,7 +197,7 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({
               open();
             }
           }}
-          className="relative mx-auto w-full md:w-[78%] lg:w-[72%] h-[42svh] sm:h-[46svh] md:h-[40vh] min-h-[240px] max-h-[620px] cursor-pointer touch-pan-y outline-none rounded-2xl focus-visible:ring-1 focus-visible:ring-[#9A773E]/60"
+          className="relative mx-auto w-full md:w-[78%] lg:w-[72%] h-[42svh] sm:h-[46svh] md:h-[50vh] min-h-[260px] max-h-[640px] cursor-pointer touch-pan-y outline-none rounded-2xl focus-visible:ring-1 focus-visible:ring-[#9A773E]/60"
         >
           <Project3DViewer ref={viewerRef} initialProject={initialProject} className="absolute inset-0" />
         </div>

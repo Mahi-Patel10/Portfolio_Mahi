@@ -593,7 +593,9 @@ function normalize(group: THREE.Group) {
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
   const diag = Math.hypot(size.x, size.z);
-  const scale = Math.min(5.2 / diag, 3.3 / size.y);
+  // 5.7 keeps the footprint's sweep inside the 6.1-wide floor ring while turning;
+  // the 3.3 height cap keeps tall models seated on the ring
+  const scale = Math.min(5.7 / diag, 3.3 / size.y);
   const inner = new THREE.Group();
   while (group.children.length) inner.add(group.children[0]);
   inner.position.set(-center.x, -center.y, -center.z);

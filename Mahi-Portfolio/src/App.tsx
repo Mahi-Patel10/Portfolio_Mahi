@@ -17,6 +17,7 @@ import { LayoutGroup } from 'motion/react';
 import { FEATURED_PROJECTS } from './data/featuredProjects';
 import { scrollToTop, useScrollReveal, useSmoothScroll } from './lib/motion';
 
+/** Read the current page from the URL hash (used on load and on Back/Forward). */
 const getInitialRoute = (): PageRoute => {
   if (typeof window !== 'undefined') {
     const hash = window.location.hash.toLowerCase().replace(/^#\/?/, '');
@@ -63,18 +64,13 @@ const getInitialRoute = (): PageRoute => {
         return { name: 'work-detail', slug: parts[1] };
       }
     }
-    if (hash === 'home' || path === '/home') {
-      return { name: 'home' };
+    if (hash.startsWith('space-detail/')) {
+      const slug = hash.split('/')[1];
+      if (slug) return { name: 'space-detail', slug };
     }
-    try {
-      const saved = sessionStorage.getItem('mahi_portfolio_route');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed?.name) return parsed;
-      }
-    } catch (e) {}
   }
-  // Land on Home; the Content page (project selector) is reached from the navigation
+  // Every other page has its own hash, so an empty hash (fresh visit, Home link,
+  // or browser Back to the first page) always means Home.
   return { name: 'home' };
 };
 

@@ -100,9 +100,10 @@ export const Project3DViewer = forwardRef<Project3DViewerHandle, Project3DViewer
         const h = container.clientHeight || 1;
         renderer.setSize(w, h);
         camera.aspect = w / h;
-        const dist = Math.max(9.6, 8.4 / camera.aspect);
+        const dist = Math.max(8.8, 7.7 / camera.aspect);
         camera.position.set(0, dist * 0.3, dist);
-        camera.lookAt(0, -0.25, 0);
+        // aim slightly below centre so the floor ring stays inside the frame
+        camera.lookAt(0, -0.45, 0);
         camera.updateProjectionMatrix();
       };
       resize();
