@@ -254,7 +254,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
           <div className="flex flex-col gap-10 md:gap-12">
             {/* Title Block */}
             <div className="space-y-3">
-              <h1 className="font-display font-light text-[clamp(3rem,min(9vw,11vh),8rem)] tracking-tight text-[#141413] leading-[0.92] whitespace-nowrap">
+              <h1 className="font-display font-light text-[clamp(2rem,min(9vw,11vh),8rem)] tracking-tight text-[#141413] leading-[0.92] whitespace-nowrap">
                 URBEN HATCH
               </h1>
               <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-[#9A773E] tracking-wide">

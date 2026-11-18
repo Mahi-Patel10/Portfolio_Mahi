@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PageRoute } from '../types';
 import { FEATURED_PROJECTS } from '../data/featuredProjects';
 import { CONTACT_DETAILS_ID, CONTACT_EMAIL, SCROLL_TO_DETAILS_KEY } from '../pages/ContactPage';
@@ -11,6 +11,9 @@ interface FooterProps {
 }
 
 const CV_HREF = '/Mahi_Patel_CV.pdf';
+
+/** Room hatch used on touch screens when the entrance is in view (mirrors the hover hatch). */
+const HATCH_BG = '[background:repeating-linear-gradient(45deg,#EFE6D8_0_1px,transparent_1px_9px)]';
 
 /** Title-case names for the plan (the project data stores some in capitals). */
 const PROJECT_LABELS: Record<string, string> = {
@@ -37,6 +40,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onCursorChange }) =>
     update();
     const id = setInterval(update, 30_000);
     return () => clearInterval(id);
+  }, []);
+
+  // Touch screens have no hover: open the door (and hatch the entrance) when the
+  // entrance scrolls into view, and close it again when it leaves.
+  const entranceRef = useRef<HTMLButtonElement>(null);
+  const [doorOpen, setDoorOpen] = useState(false);
+  useEffect(() => {
+    const el = entranceRef.current;
+    if (!el || !window.matchMedia('(hover: none)').matches) return;
+    let t: ReturnType<typeof setTimeout>;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        clearTimeout(t);
+        if (entry.isIntersecting) t = setTimeout(() => setDoorOpen(true), 250);
+        else setDoorOpen(false);
+      },
+      { threshold: 0.7 }
+    );
+    io.observe(el);
+    return () => {
+      clearTimeout(t);
+      io.disconnect();
+    };
   }, []);
 
   const hover = {
@@ -146,10 +172,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onCursorChange }) =>
 
           {/* Entrance · Contact (door in the outer wall) */}
           <button
+            ref={entranceRef}
             type="button"
             onClick={goToContact}
             {...hover}
-            className={`${room} md:col-span-7 min-h-[150px] md:min-h-[170px]`}
+            className={`${room} md:col-span-7 min-h-[150px] md:min-h-[170px] ${doorOpen ? HATCH_BG : ''}`}
             aria-label="Contact — open the contact details"
           >
             <span className={roomNo}>Entrance</span>
@@ -172,7 +199,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onCursorChange }) =>
                 y2="64"
                 stroke="#9A773E"
                 strokeWidth="3"
-                className="origin-[0px_64px] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/room:-rotate-[80deg] group-focus-visible/room:-rotate-[80deg]"
+                className={`origin-[0px_64px] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/room:-rotate-[80deg] group-focus-visible/room:-rotate-[80deg] ${
+                  doorOpen ? '-rotate-[80deg]' : ''
+                }`}
               />
             </svg>
           </button>

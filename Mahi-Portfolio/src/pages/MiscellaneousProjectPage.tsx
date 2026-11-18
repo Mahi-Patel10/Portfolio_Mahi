@@ -274,7 +274,7 @@ export const MiscellaneousProjectPage: React.FC<MiscellaneousProjectPageProps> =
       <section className="max-w-7xl mx-auto px-6 md:px-12">
         <header className="pb-10 md:pb-14 flex flex-col gap-10 md:gap-12">
           <div className="space-y-3">
-            <h1 className="font-display font-light text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-[#141413] leading-[0.92]">
+            <h1 className="font-display font-light text-[clamp(1.9rem,8.5vw,3.75rem)] sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-[#141413] leading-[0.92] break-words">
               MISCELLANEOUS
             </h1>
             <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-[#9A773E] tracking-wide">
