@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PageRoute } from '../types';
-import { ArrowUpRight, Check, Copy, Download, FileText, MessageCircle, Phone, Send } from 'lucide-react';
+import { ArrowUpRight, Check, Copy, Download, FileText, Send } from 'lucide-react';
 import { smoothScrollTo } from '../lib/motion';
 
 interface ContactPageProps {
@@ -9,8 +9,6 @@ interface ContactPageProps {
 }
 
 export const CONTACT_EMAIL = 'mahipatel1329@gmail.com';
-export const CONTACT_PHONE = '+91 97371 58840';
-const PHONE_DIGITS = '919737158840';
 const CV_HREF = '/Mahi_Patel_CV.pdf';
 
 /** Set by links elsewhere on the site (e.g. the footer) to land directly on the contact details. */
@@ -33,7 +31,7 @@ const actionClass =
   'group inline-flex items-center gap-2 rounded-full border border-[#E5E3DD] px-4 py-2 text-sm text-[#141413] hover:border-[#141413] hover:bg-[#141413] hover:text-[#FFFFFF] transition-colors duration-300';
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorChange }) => {
-  const [copied, setCopied] = useState<'email' | 'phone' | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const hover = {
     onMouseEnter: () => onCursorChange?.('link'),
@@ -56,20 +54,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
     return () => clearTimeout(t);
   }, []);
 
-  const copy = async (what: 'email' | 'phone') => {
+  const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(what === 'email' ? CONTACT_EMAIL : CONTACT_PHONE);
-      setCopied(what);
-      setTimeout(() => setCopied((c) => (c === what ? null : c)), 2200);
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
     } catch {}
   };
-
-  const CopyButton: React.FC<{ what: 'email' | 'phone' }> = ({ what }) => (
-    <button type="button" onClick={() => copy(what)} {...copyHover} className={actionClass} aria-label={`Copy ${what}`}>
-      {copied === what ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-      {copied === what ? 'Copied' : 'Copy'}
-    </button>
-  );
 
   /** One row of the contact sheet: label · large value · actions. */
   const Row: React.FC<{ label: string; children: React.ReactNode; actions?: React.ReactNode; note?: React.ReactNode }> = ({
@@ -103,7 +94,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
           </h1>
           <p className="md:col-span-4 text-base leading-relaxed text-[#55534D]">
             Whether it’s an internship, a new interior project or a creative collaboration, I’d love to hear about it.
-            Write or call me directly and I’ll get back to you personally.
+            Write to me directly and I’ll get back to you personally.
           </p>
         </div>
       </section>
@@ -122,38 +113,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
                 <a href={`mailto:${CONTACT_EMAIL}`} {...hover} className={actionClass}>
                   <Send className="h-3.5 w-3.5" /> Write
                 </a>
-                <CopyButton what="email" />
+                <button type="button" onClick={copyEmail} {...copyHover} className={actionClass} aria-label="Copy email address">
+                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                  {copied ? 'Copied' : 'Copy'}
+                </button>
               </>
             }
           >
             <a href={`mailto:${CONTACT_EMAIL}`} {...hover} className="hover:text-[#9A773E] transition-colors whitespace-nowrap">
               {CONTACT_EMAIL}
-            </a>
-          </Row>
-
-          <Row
-            label="Phone"
-            note="Calls and WhatsApp messages welcome"
-            actions={
-              <>
-                <a href={`tel:+${PHONE_DIGITS}`} {...hover} className={actionClass}>
-                  <Phone className="h-3.5 w-3.5" /> Call
-                </a>
-                <a
-                  href={`https://wa.me/${PHONE_DIGITS}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  {...hover}
-                  className={actionClass}
-                >
-                  <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
-                </a>
-                <CopyButton what="phone" />
-              </>
-            }
-          >
-            <a href={`tel:+${PHONE_DIGITS}`} {...hover} className="hover:text-[#9A773E] transition-colors tabular-nums whitespace-nowrap">
-              {CONTACT_PHONE}
             </a>
           </Row>
 

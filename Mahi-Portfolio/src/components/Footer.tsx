@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PageRoute } from '../types';
 import { FEATURED_PROJECTS } from '../data/featuredProjects';
-import { CONTACT_DETAILS_ID, CONTACT_EMAIL, CONTACT_PHONE, SCROLL_TO_DETAILS_KEY } from '../pages/ContactPage';
+import { CONTACT_DETAILS_ID, CONTACT_EMAIL, SCROLL_TO_DETAILS_KEY } from '../pages/ContactPage';
 import { smoothScrollTo } from '../lib/motion';
 
 interface FooterProps {
@@ -197,7 +197,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onCursorChange }) =>
         <div className="mt-10 pt-5 border-t border-[#E2DBCF] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-[#6E6C65]">
           <span>© {new Date().getFullYear()} Mahi Patel · Interior &amp; Spatial Design</span>
           <span className="tabular-nums">
-            Ahmedabad · {studioTime || '--:--'} IST · <a href={`tel:+919737158840`} {...hover} className="hover:text-[#141413] transition-colors">{CONTACT_PHONE}</a>
+            Ahmedabad · {studioTime || '--:--'} IST
           </span>
           <button
             type="button"
