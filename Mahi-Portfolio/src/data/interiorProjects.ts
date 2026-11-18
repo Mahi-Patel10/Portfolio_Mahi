@@ -310,12 +310,12 @@ export const INTERIOR_PROJECTS: Project[] = [
     coverImage: '/projects/urben-hatch/sheet-01-concept.jpg',
     gallery: [
       '/projects/urben-hatch/sheet-01-concept.jpg',
-      '/projects/urben-hatch/sheet-02-ground-floor-plan.jpg',
-      '/projects/urben-hatch/sheet-03-first-floor-plan.jpg',
-      '/projects/urben-hatch/sheet-04-sections.jpg',
+      '/projects/urben-hatch/sheet-02-ground-floor-plan-hd.jpg',
+      '/projects/urben-hatch/sheet-03-first-floor-plan-hd.jpg',
+      '/projects/urben-hatch/sheet-04-sections-hd.jpg',
       '/projects/urben-hatch/sheet-05-reception.jpg',
-      '/projects/urben-hatch/sheet-06-double-room.jpg',
-      '/projects/urben-hatch/sheet-07-single-room.jpg',
+      '/projects/urben-hatch/sheet-06-double-room-hd.jpg',
+      '/projects/urben-hatch/sheet-07-single-room-hd.jpg',
     ],
     materials: [
       { name: 'Historic Terracotta Brick & Jaali', hex: '#B35446' },

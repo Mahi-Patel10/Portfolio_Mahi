@@ -18,20 +18,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onCursorChange,
 }) => {
   const isHomePage = currentRoute.name === 'home';
-  const [scrolledPastHero, setScrolledPastHero] = useState(false);
-
-  useEffect(() => {
-    if (!isHomePage) {
-      setScrolledPastHero(false);
-      return;
-    }
-    const handleScroll = () => {
-      setScrolledPastHero(window.scrollY > 150);
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isHomePage]);
 
   const isAboutActive = currentRoute.name === 'about';
   const isContactActive = currentRoute.name === 'contact';
@@ -51,6 +37,36 @@ export const Navbar: React.FC<NavbarProps> = ({
       window.removeEventListener('keydown', onKey);
     };
   }, [menuOpen]);
+  // Hide the header while scrolling down, reveal it on any scroll up
+  const [navHidden, setNavHidden] = useState(false);
+  useEffect(() => {
+    setNavHidden(false);
+    let lastY = window.scrollY;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if (y < 80) setNavHidden(false);
+      else if (delta > 6) setNavHidden(true);
+      else if (delta < -6) setNavHidden(false);
+      if (Math.abs(delta) > 6 || y < 80) lastY = y;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [currentRoute]);
+  const hideNav = navHidden && !menuOpen;
+  // Let sticky page elements follow the header (see --sticky-top in index.css)
+  useEffect(() => {
+    document.documentElement.toggleAttribute('data-nav-hidden', hideNav);
+  }, [hideNav]);
+
   const go = (route: PageRoute) => {
     setMenuOpen(false);
     onNavigate(route);
@@ -65,11 +81,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header
       id="main-nav-header"
-      className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-4 px-5 py-4 sm:px-6 sm:py-5 md:px-12 md:py-6 backdrop-blur-md bg-[#FFFFFF]/85 border-b border-[#E5E3DD] transition-all duration-300"
+      className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between gap-4 px-5 py-4 sm:px-6 sm:py-5 md:px-12 md:py-4 backdrop-blur-md bg-[#FFFFFF]/85 border-b border-[#E5E3DD] transition-[translate,background-color,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        hideNav ? '-translate-y-full' : ''
+      }`}
     >
       {/* Brand / Logo */}
       <div className="flex items-center min-w-0 md:min-w-[200px] h-10">
-        {(!isHomePage || scrolledPastHero) && (
+        {(
           <div className="flex items-center gap-3.5">
             <button
               id="nav-logo-btn"
@@ -86,18 +104,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <motion.span
-                    layoutId="mahi-patel-brand-title"
-                    transition={{
-                      type: 'spring',
-                      stiffness: 95,
-                      damping: 18,
-                      mass: 0.9,
-                    }}
+                  <span
                     className="font-display text-lg md:text-xl font-light tracking-[0.06em] text-[#141413] group-hover:text-[#9A773E] transition-colors origin-top-left inline-block whitespace-nowrap"
                   >
                     Mahi Patel
-                  </motion.span>
+                  </span>
                   <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

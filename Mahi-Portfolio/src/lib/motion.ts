@@ -20,10 +20,12 @@ export function useSmoothScroll() {
   useEffect(() => {
     if (prefersReducedMotion()) return;
     const instance = new Lenis({
-      duration: 1.15,
-      easing: easeOutExpo,
+      // Continuous follow (lerp) instead of a fixed-duration expo glide: the expo
+      // curve covered most of the distance at once and then crawled, which read as
+      // the scroll "stopping in between".
+      lerp: 0.12,
       smoothWheel: true,
-      wheelMultiplier: 0.95,
+      wheelMultiplier: 1,
       autoRaf: true,
     });
     lenis = instance;

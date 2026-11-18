@@ -81,7 +81,7 @@ const TECHNICAL_DRAWINGS = [
     category: 'plans',
     title: 'Sheet 02 · Ground Floor Plan (1:250) — Public Hospitality Core',
     scale: '1:250',
-    src: '/projects/urben-hatch/sheet-02-ground-floor-plan.jpg',
+    src: '/projects/urben-hatch/sheet-02-ground-floor-plan-hd.jpg',
     caption:
       'Detailed 1:250 Ground Floor Plan with compass orientation, section cutlines AA’, BB’, CC’ and 9-zone functional legend: 1. Sitting Area, 2. Game Room, 3. Co-Working Area, 4. Reception + Lounge, 5. Conference Room, 6. Housekeeping, 7. Kitchen, 8. Staff Room, 9. Cafe.',
     highlights: ['1:250 Scale Plan', '9-Zone Program Schedule', 'Section Cutlines AA’, BB’, CC’', 'Courtyard & Entry Axis'],
@@ -92,7 +92,7 @@ const TECHNICAL_DRAWINGS = [
     category: 'plans',
     title: 'Sheet 03 · First Floor Plan (1:250) — Accommodations & Dormitories',
     scale: '1:250',
-    src: '/projects/urben-hatch/sheet-03-first-floor-plan.jpg',
+    src: '/projects/urben-hatch/sheet-03-first-floor-plan-hd.jpg',
     caption:
       'Detailed 1:250 accommodations plan mapping room typologies along arcaded corridors: 1. Single Room, 2. Double Room, 3. 4-Sharing Dormitory, and 4. 6-Sharing Dormitory.',
     highlights: ['1:250 Accommodations Plan', 'Single & Double Suites', '4-Share & 6-Share Dorms', 'Arcaded Circulation'],
@@ -103,7 +103,7 @@ const TECHNICAL_DRAWINGS = [
     category: 'plans',
     title: 'Sheet 04 · Architectural Sections (1:250) — AA’, BB’ & CC’',
     scale: '1:250',
-    src: '/projects/urben-hatch/sheet-04-sections.jpg',
+    src: '/projects/urben-hatch/sheet-04-sections-hd.jpg',
     caption:
       'Three measured architectural sections at 1:250: Section AA’ cuts through the central double-height volume and timber roof trusses; Section BB’ through the clock tower minaret and arcade wing; Section CC’ through the open courtyard and circulation staircase.',
     highlights: ['Section AA’ Longitudinal', 'Section BB’ Minaret Tower', 'Section CC’ Courtyard Axis', 'Scale 1:250'],
@@ -125,7 +125,7 @@ const TECHNICAL_DRAWINGS = [
     category: 'suites',
     title: 'Sheet 06 · Double Room Suite (1:25) — Plan, Material Palette & 3D Views',
     scale: '1:25 & 3D Renders',
-    src: '/projects/urben-hatch/sheet-06-double-room.jpg',
+    src: '/projects/urben-hatch/sheet-06-double-room-hd.jpg',
     caption:
       '1:25 measured plan, material specifications (black metal with warm accents, dark-stained wood, inlay terrazzo flooring, textured textiles), and two 3D perspective renders showing the cantilever orange stairs, lower lounge, and upper mezzanine sleeping loft.',
     highlights: ['1:25 Layout Plan', 'Material Sample Palette', 'Orange Cantilever Stair', 'Mezzanine Loft Bed'],
@@ -136,7 +136,7 @@ const TECHNICAL_DRAWINGS = [
     category: 'suites',
     title: 'Sheet 07 · Single Room Suite (1:25) — Plan, Material Palette & 3D Views',
     scale: '1:25 & 3D Renders',
-    src: '/projects/urben-hatch/sheet-07-single-room.jpg',
+    src: '/projects/urben-hatch/sheet-07-single-room-hd.jpg',
     caption:
       '1:25 measured layout plan, material schedule (accent panel, striped wallpaper, linen, brass arc floor lamp), and two 3D perspective views featuring the custom crimson plinth bed and "Hey Love" illuminated artwork.',
     highlights: ['1:25 Layout Plan', 'Material Sample Moodboard', 'Crimson Bed Plinth', 'Striped Graphic Accent'],
@@ -254,7 +254,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
           <div className="flex flex-col gap-10 md:gap-12">
             {/* Title Block */}
             <div className="space-y-3">
-              <h1 className="font-display font-light text-[11vw] xl:text-9xl tracking-tight text-[#141413] leading-[0.92] whitespace-nowrap">
+              <h1 className="font-display font-light text-[clamp(3rem,min(9vw,11vh),8rem)] tracking-tight text-[#141413] leading-[0.92] whitespace-nowrap">
                 URBEN HATCH
               </h1>
               <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-[#9A773E] tracking-wide">
@@ -304,7 +304,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 2. PROJECT STATEMENT & ADAPTIVE REUSE VISION                              */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-28">
+      <section className="mt-16 md:mt-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="flex flex-col gap-8 md:gap-10 pt-10 md:pt-14 border-t border-[#E5E3DD]">
             <div className="space-y-3 max-w-4xl">
@@ -335,7 +335,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 3. ARCHITECTURAL PRINCIPLES & SPATIAL STRATEGY                           */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
+      <section className="mt-16 md:mt-20 max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16 pb-6 border-b border-[#E5E3DD]">
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#B35446] mb-2">
@@ -375,7 +375,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 6. TECHNICAL WORKING DRAWINGS & SECTIONS (INTERACTIVE VIEWER)              */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
+      <section className="mt-16 md:mt-20 max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-6 border-b border-[#E5E3DD]">
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#B35446] mb-2">
@@ -498,7 +498,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 8. PROJECT-TO-PROJECT FOOTER NAVIGATION                                   */}
       {/* ========================================================================= */}
-      <nav aria-label="Project navigation" className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
+      <nav aria-label="Project navigation" className="mt-16 md:mt-20 max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-2 border-t border-b border-[#E5E3DD]">
           <button
             type="button"

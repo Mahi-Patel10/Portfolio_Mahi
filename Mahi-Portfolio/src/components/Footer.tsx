@@ -194,7 +194,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, o
 
       {/* Oversized wordmark */}
       <div aria-hidden="true" className="select-none px-4 md:px-8 leading-none">
-        <div className="font-display font-light text-[#F4F1EA]/[0.06] text-center tracking-tight whitespace-nowrap text-[17vw] md:text-[9vw] pb-[1vw] md:pb-[0.5vw]">
+        <div className="font-display font-light text-[#F4F1EA]/[0.06] text-center tracking-tight whitespace-nowrap text-[17vw] md:text-[7vw] pb-[1vw] md:pb-[0.5vw]">
           MAHI PATEL
         </div>
       </div>

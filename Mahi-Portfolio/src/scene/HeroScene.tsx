@@ -387,12 +387,21 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
     let lastTime = performance.now();
     const FIXED_ROTATION_X = 0.04; // Locked vertical axis angle
 
+    // Skip all scene work while the hero is scrolled out of view or the tab is
+    // hidden, so the GPU is free for smooth page scrolling.
+    let visible = true;
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+    });
+    visibilityObserver.observe(container);
+
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
       const now = performance.now();
       const delta = Math.min((now - lastTime) / 1000, 0.05);
       lastTime = now;
+      if (!visible || document.hidden) return;
 
       // Subtle architectural idle floating elevation & gentle breathing
       const timeSec = now * 0.001;
@@ -483,6 +492,7 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      visibilityObserver.disconnect();
       resizeObserver.disconnect();
       container.removeEventListener('pointermove', onPointerMove);
       container.removeEventListener('pointerdown', onPointerDown);

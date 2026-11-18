@@ -20,6 +20,9 @@ export const PreviewTile: React.FC<PreviewTileProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const meshRef = useRef<THREE.Mesh | null>(null);
   const textureLoaderRef = useRef<THREE.TextureLoader>(new THREE.TextureLoader());
+  // Only render while the tile is actually shown (hovering a project)
+  const visibleRef = useRef(visible);
+  visibleRef.current = visible;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -74,6 +77,7 @@ export const PreviewTile: React.FC<PreviewTileProps> = ({
     let reqId: number;
     const animate = () => {
       reqId = requestAnimationFrame(animate);
+      if (!visibleRef.current || document.hidden) return;
 
       if (meshRef.current) {
         meshRef.current.rotation.y += 0.008;

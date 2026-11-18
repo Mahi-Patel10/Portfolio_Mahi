@@ -370,7 +370,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 2. PROJECT BRIEF SECTION                                                  */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-28">
+      <section className="mt-16 md:mt-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="flex flex-col gap-8 md:gap-10 pt-10 md:pt-14 border-t border-[#E5E3DD]">
             <div className="space-y-3 max-w-4xl">
@@ -401,7 +401,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 4. FLOOR PLANS — GROUND & FIRST                                           */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
+      <section className="mt-16 md:mt-20 max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16 pb-6 border-b border-[#E5E3DD]">
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">
@@ -482,7 +482,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 5. SECTIONS AA, BB, CC, DD                                                */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
+      <section className="mt-16 md:mt-20 max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#E5E3DD]">
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">
@@ -531,7 +531,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
       {/* 6. INTERIOR VIEWS — BEDROOMS, BATHROOM, KITCHEN (shown once added)        */}
       {/* ========================================================================= */}
       {INTERIOR_VIEWS.length > 0 && (
-        <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
+        <section className="mt-16 md:mt-20 max-w-7xl mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#E5E3DD]">
             <div>
               <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">

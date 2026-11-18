@@ -20,12 +20,12 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     modelKey: 'urben-hatch',
     images: [
       { src: '/projects/urben-hatch/sheet-01-concept.jpg', caption: '01 · Concept & Site Analysis — Heritage Adaptive Reuse, Objectives & Spatial Connectivity' },
-      { src: '/projects/urben-hatch/sheet-02-ground-floor-plan.jpg', caption: '02 · Ground Floor Plan (1:250) — Public Amenities, Co-Working Hub, Reception & Cafe' },
-      { src: '/projects/urben-hatch/sheet-03-first-floor-plan.jpg', caption: '03 · First Floor Plan (1:250) — Single, Double & Dormitory Accommodations' },
-      { src: '/projects/urben-hatch/sheet-04-sections.jpg', caption: '04 · Architectural Sections (1:250) — Section AA’, BB’, and CC’ Spatial Hierarchy' },
+      { src: '/projects/urben-hatch/sheet-02-ground-floor-plan-hd.jpg', caption: '02 · Ground Floor Plan (1:250) — Public Amenities, Co-Working Hub, Reception & Cafe' },
+      { src: '/projects/urben-hatch/sheet-03-first-floor-plan-hd.jpg', caption: '03 · First Floor Plan (1:250) — Single, Double & Dormitory Accommodations' },
+      { src: '/projects/urben-hatch/sheet-04-sections-hd.jpg', caption: '04 · Architectural Sections (1:250) — Section AA’, BB’, and CC’ Spatial Hierarchy' },
       { src: '/projects/urben-hatch/sheet-05-reception.jpg', caption: '05 · Reception & Central Atrium — Multi-Level Plans (2300, 4700, 6200) & Crimson Staircase Renders' },
-      { src: '/projects/urben-hatch/sheet-06-double-room.jpg', caption: '06 · Double Room Suite (1:25) — Detailed Plan, Material Palette & Mezzanine Loft Renders' },
-      { src: '/projects/urben-hatch/sheet-07-single-room.jpg', caption: '07 · Single Room Suite (1:25) — Detailed Plan, Material Palette & Crimson Bedroom Renders' },
+      { src: '/projects/urben-hatch/sheet-06-double-room-hd.jpg', caption: '06 · Double Room Suite (1:25) — Detailed Plan, Material Palette & Mezzanine Loft Renders' },
+      { src: '/projects/urben-hatch/sheet-07-single-room-hd.jpg', caption: '07 · Single Room Suite (1:25) — Detailed Plan, Material Palette & Crimson Bedroom Renders' },
     ],
     details: [
       { label: 'Location', value: 'Gheekanta, Old City Ahmedabad' },

@@ -246,7 +246,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 2. PROJECT BRIEF SECTION                                                  */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-28">
+      <section className="mt-16 md:mt-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="flex flex-col gap-8 md:gap-10 pt-10 md:pt-14 border-t border-[#E5E3DD]">
             <div className="space-y-3 max-w-4xl">
@@ -277,7 +277,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 3. CONCEPT – KANSO (簡素 — Simplicity & Purity)                           */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
+      <section className="mt-16 md:mt-20 max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16 pb-6 border-b border-[#E5E3DD]">
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">
@@ -375,7 +375,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 5. DESIGN DEVELOPMENT — PLAN & SPATIAL DRAWINGS                           */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
+      <section className="mt-16 md:mt-20 max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16 pb-6 border-b border-[#E5E3DD]">
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">
@@ -492,7 +492,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 6. DESIGN DEVELOPMENT — ELEVATIONS A, B, C, D                             */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
+      <section className="mt-16 md:mt-20 max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#E5E3DD]">
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">

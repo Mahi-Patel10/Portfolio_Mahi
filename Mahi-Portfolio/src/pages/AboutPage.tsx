@@ -24,12 +24,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onCursorChange
     <div id="about-page" className="relative min-h-screen bg-[#FFFFFF] text-[#141413] pt-28 md:pt-32 pb-28">
       {/* 1. Portrait & introduction */}
       <section data-reveal className="px-6 md:px-14 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
-        <figure className="md:col-span-5 md:sticky md:top-28">
+        <figure className="md:col-span-5 md:sticky md:top-[var(--sticky-top)] transition-[top] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
           <div className="relative overflow-hidden bg-[#ECEBE7] aspect-[4/5]">
             <img
-              src="/about/mahi-patel-cv-portrait.jpg"
+              src="/about/mahi-patel-portrait-hd.jpg"
               alt="Portrait of Mahi Patel, interior designer"
-              className="absolute inset-0 h-full w-full object-cover object-[50%_25%]"
+              className="absolute inset-0 h-full w-full object-cover object-[50%_40%]"
               loading="eager"
             />
           </div>
@@ -109,7 +109,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onCursorChange
       </section>
 
       {/* 2. Philosophy */}
-      <section data-reveal className="mt-24 md:mt-32 bg-[#F8F8F6] border-y border-[#E5E3DD]">
+      <section data-reveal className="mt-20 md:mt-24 bg-[#F8F8F6] border-y border-[#E5E3DD]">
         <div className="px-6 md:px-14 max-w-5xl mx-auto py-20 md:py-24 text-center">
           <Eyebrow center>Philosophy</Eyebrow>
           <blockquote className="mt-8 font-display font-light text-2xl sm:text-3xl md:text-4xl leading-snug text-[#141413]">

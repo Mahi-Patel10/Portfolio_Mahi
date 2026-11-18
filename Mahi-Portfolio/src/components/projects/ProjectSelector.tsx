@@ -136,7 +136,7 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({
       id="project-selector"
       aria-roledescription="carousel"
       aria-label="Selected projects"
-      className="relative min-h-[100svh] flex flex-col pt-44 sm:pt-32 md:pt-28 pb-8 md:pb-10"
+      className="relative min-h-[100svh] flex flex-col pt-44 sm:pt-32 md:pt-24 pb-8 md:pb-10"
     >
       {/* Eyebrow row */}
       <div className="flex items-center justify-between font-mono-code text-[11px] tracking-widest uppercase text-[#7A7770]">
@@ -163,7 +163,7 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({
                 animate="center"
                 exit="exit"
                 transition={textTransition}
-                className="block font-display font-light text-[88px] sm:text-[112px] md:text-[132px] leading-[0.9] tracking-tight text-[#141413] tabular-nums"
+                className="block font-display font-light text-[72px] sm:text-[88px] md:text-[clamp(56px,9vh,112px)] leading-[0.9] tracking-tight text-[#141413] tabular-nums"
               >
                 {project.number}
               </motion.span>
@@ -176,7 +176,7 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({
       </div>
 
       {/* Stage with flanking arrows */}
-      <div className="relative flex-1 flex items-center min-h-[300px] sm:min-h-[380px]">
+      <div className="relative flex-1 flex items-center min-h-[260px] sm:min-h-[300px]">
         {navButton(-1, 'hidden md:flex absolute left-0 lg:left-4 z-10')}
 
         <div
@@ -197,7 +197,7 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({
               open();
             }
           }}
-          className="relative mx-auto w-full md:w-[78%] lg:w-[72%] h-[42svh] sm:h-[46svh] md:h-[50vh] min-h-[280px] max-h-[620px] cursor-pointer touch-pan-y outline-none rounded-2xl focus-visible:ring-1 focus-visible:ring-[#9A773E]/60"
+          className="relative mx-auto w-full md:w-[78%] lg:w-[72%] h-[42svh] sm:h-[46svh] md:h-[40vh] min-h-[240px] max-h-[620px] cursor-pointer touch-pan-y outline-none rounded-2xl focus-visible:ring-1 focus-visible:ring-[#9A773E]/60"
         >
           <Project3DViewer ref={viewerRef} initialProject={initialProject} className="absolute inset-0" />
         </div>

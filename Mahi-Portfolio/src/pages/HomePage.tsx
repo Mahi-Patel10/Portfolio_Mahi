@@ -38,7 +38,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* 1. HERO 3D STAGE SECTION (hidden when viewing detail) */}
       {/* ---------------------------------------------------- */}
       {!isDetailOpen && (
-        <section className="relative w-full h-[100vh] min-h-[700px] flex flex-col justify-between p-6 md:p-14 overflow-hidden">
+        <section className="relative w-full h-[100svh] min-h-[560px] flex flex-col justify-between p-6 md:p-14 overflow-hidden">
           {/* 3D WebGL Canvas Layer (Click to rotate & animate material fill) */}
           <HeroScene
             mode={mode}
@@ -103,7 +103,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
 
               <motion.h1
-                layoutId="mahi-patel-brand-title"
                 transition={{
                   type: 'spring',
                   stiffness: 95,

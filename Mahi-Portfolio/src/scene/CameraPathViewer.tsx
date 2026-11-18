@@ -257,8 +257,15 @@ export const CameraPathViewer: React.FC<CameraPathViewerProps> = ({
 
     // Animation loop: smoothly interpolate camera position & lookAt
     let reqId: number;
+    // Pause rendering while off-screen or in a hidden tab
+    let visible = true;
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+    });
+    visibilityObserver.observe(container);
     const animate = () => {
       reqId = requestAnimationFrame(animate);
+      if (!visible || document.hidden) return;
 
       // Lerp camera position
       camera.position.lerp(targetCamPosRef.current, 0.045);
@@ -288,6 +295,7 @@ export const CameraPathViewer: React.FC<CameraPathViewerProps> = ({
 
     return () => {
       cancelAnimationFrame(reqId);
+      visibilityObserver.disconnect();
       window.removeEventListener('resize', handleResize);
       if (container && renderer.domElement) {
         container.removeChild(renderer.domElement);
