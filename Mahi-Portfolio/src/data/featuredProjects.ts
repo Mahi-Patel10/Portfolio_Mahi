@@ -1,7 +1,7 @@
 import { FeaturedProject } from '../types';
 
 /**
- * Content page projects, in presentation order (01 → 04): Urben Hatch, Royce', Villa, Miscellaneous.
+ * Content page projects, in presentation order (01 → 04): Urban Hatch, Royce', Villa, Miscellaneous.
  *
  * To add real media, drop files into /public/projects/<slug>/ and reference them:
  *   images: [{ src: '/projects/royce-store/01.jpg', caption: 'Storefront' }]
@@ -13,7 +13,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     id: 1,
     number: '01',
     slug: 'urben-hatch',
-    name: 'URBEN HATCH',
+    name: 'URBAN HATCH',
     type: 'Adaptive Reuse Hostel Hotel',
     description:
       'Adaptive reuse of the historic R.C. High School of Commerce in Gheekanta, Old City Ahmedabad into an energetic boutique hostel and co-living hotel. Preserving historic colonial arcades, brick jaali screens, and timber roof trusses while inserting cantilevered steel stairs, mezzanine sleeping pods, public cafe, and communal co-working spaces.',

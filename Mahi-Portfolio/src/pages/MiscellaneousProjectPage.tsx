@@ -98,9 +98,9 @@ const PARTITION_MODELS: Shot[] = [
 ];
 
 const PARTITION_DRAWINGS: Shot = {
-  src: `${DIR}/partition-drawings.jpg`,
+  src: `${DIR}/partition-drawings-hd.jpg`,
   title: 'Partition Wall — Drawings',
-  caption: 'Elevation, plan, two joinery details, side sections and an isometric view.',
+  caption: 'Japandi partition, 2500 × 3000 mm at 1 : 20 — plan, front elevation, bamboo and timber joinery details, sections AA′ and BB′, and an isometric view. Wood 80 × 60 mm, bamboo Ø40 mm, linen 0.8 mm.',
 };
 
 const STAIR_RENDERS: Shot[] = [

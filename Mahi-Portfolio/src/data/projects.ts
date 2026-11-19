@@ -636,7 +636,7 @@ export const SPATIAL_PROJECTS: SpaceProject[] = [
     id: 'urben-hatch',
     slug: 'urben-hatch',
     index: '05',
-    title: 'Urben Hatch',
+    title: 'Urban Hatch',
     subtitle: 'Adaptive reuse of a historic colonial high school into an energetic hostel and co-living hotel',
     typology: 'Hospitality Lounge',
     year: '2024',
@@ -645,7 +645,7 @@ export const SPATIAL_PROJECTS: SpaceProject[] = [
     client: 'Design Studio VI · Indus University',
     summary: 'A vibrant boutique hostel celebrating historic colonial arches, contemporary brick jaali screens, and crimson steel stairs.',
     heroImage: '/projects/urben-hatch/sheet-01-concept.jpg',
-    overview: 'Urben Hatch transforms the historic R.C. High School of Commerce into an energetic civic hospitality hub for travelers, backpackers, and creative interns. By preserving the historic brick arcade colonnades, high ceilings, and timber trusses, the design inserts bold crimson steel circulation cores, double-height mezzanine guestroom pods, and a bustling ground-floor cafe and co-working space.',
+    overview: 'Urban Hatch transforms the historic R.C. High School of Commerce into an energetic civic hospitality hub for travelers, backpackers, and creative interns. By preserving the historic brick arcade colonnades, high ceilings, and timber trusses, the design inserts bold crimson steel circulation cores, double-height mezzanine guestroom pods, and a bustling ground-floor cafe and co-working space.',
     materials: [
       'Historic Terracotta Brick & Jaali Screen',
       'Architectural Crimson Steel Framework',

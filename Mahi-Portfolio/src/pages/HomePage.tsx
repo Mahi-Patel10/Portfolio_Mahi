@@ -19,15 +19,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   const [colorProgress, setColorProgress] = useState(0);
   const [resetTrigger, setResetTrigger] = useState(0);
-  const [spinTrigger, setSpinTrigger] = useState(0);
+  const [spinTrigger] = useState(0);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   const handleResetColor = () => {
     setResetTrigger((prev) => prev + 1);
-  };
-
-  const handleTriggerSpin = () => {
-    setSpinTrigger((prev) => prev + 1);
   };
 
   const pct = Math.round(colorProgress * 100);
@@ -48,46 +44,64 @@ export const HomePage: React.FC<HomePageProps> = ({
             onCursorChange={onCursorChange}
           />
 
-          {/* Top Header Row: Interactive Material & Rotation Controls */}
-          <div className="relative z-10 pt-16 flex items-start justify-end pointer-events-none">
-            <div className="pointer-events-auto flex items-center gap-2.5 bg-[#FFFFFF]/90 backdrop-blur-md border border-[#E5E3DD] px-4 py-2 rounded-full text-xs font-mono-code text-[#141413] shadow-sm transition-all">
-              <button
-                onClick={handleTriggerSpin}
-                onMouseEnter={() => onCursorChange?.('link')}
-                onMouseLeave={() => onCursorChange?.('default')}
-                className="flex items-center gap-2 hover:text-[#9A773E] transition-colors"
-                title="Click to rotate 3D model and fill materials smoothly"
-              >
-                <span
-                  className={`h-2 w-2 rounded-full ${
-                    pct >= 95
-                      ? 'bg-emerald-500'
-                      : pct > 0
-                      ? 'bg-[#9A773E] animate-pulse'
-                      : 'bg-[#D8A46B] animate-ping'
-                  }`}
-                />
-                <span className="text-[#141413] font-medium tracking-wide">
-                  {pct === 0
-                    ? '✦ CLICK TO ROTATE & MATERIALIZE'
-                    : pct >= 95
-                    ? '✦ 360° ACTIVE · DRAG TO INSPECT'
-                    : `MATERIALIZING · ${pct}%`}
-                </span>
-              </button>
+          {/* Spacer under the header (keeps the name centred in the hero) */}
+          <div className="relative z-10 pt-16 pointer-events-none" aria-hidden="true" />
 
-              {/* Quick reset to clay when color is filled */}
-              {pct > 5 && (
-                <button
-                  onClick={handleResetColor}
-                  onMouseEnter={() => onCursorChange?.('link')}
-                  onMouseLeave={() => onCursorChange?.('default')}
-                  className="flex items-center gap-1.5 px-2.5 py-0.5 border border-[#E5E3DD] rounded-full text-[11px] text-[#7A7770] hover:text-[#141413] hover:border-[#141413] transition-colors ml-1"
-                  title="Reset back to Architectural Clay study"
-                >
-                  <RotateCcw className="w-3 h-3" />
-                  <span>Clay</span>
-                </button>
+          {/* Drawing annotation: a gold leader line onto the model, with the note on its shelf.
+              Laptop: the model sits right of centre; phone: it sits low, below the copy. */}
+          <div
+            className="absolute z-10 pointer-events-none left-1/2 top-[72%] sm:left-[53%] sm:top-[66%]"
+            aria-live="polite"
+          >
+            {/* the point on the model */}
+            <span className="absolute -left-[5px] -top-[5px] h-[10px] w-[10px] rounded-full border border-[#9A773E] bg-[#FFFFFF]/80">
+              <span className={`absolute inset-[2px] rounded-full bg-[#9A773E] ${pct === 0 ? 'animate-pulse' : ''}`} />
+            </span>
+            {/* phone: a short vertical leader up into the gap above the model */}
+            <span
+              aria-hidden="true"
+              className="sm:hidden absolute left-0 bottom-[5px] h-[9px] w-px bg-[#9A773E] origin-bottom [animation:fade-up_0.6s_ease-out_0.6s_both]"
+            />
+            {/* laptop: a dog-leg leader out to the white space left of the model */}
+            <svg
+              aria-hidden="true"
+              className="hidden sm:block absolute right-0 top-0 overflow-visible w-[250px] h-[64px]"
+              viewBox="0 0 250 64"
+              preserveAspectRatio="none"
+            >
+              <polyline
+                points="246,4 186,60 0,60"
+                fill="none"
+                stroke="#9A773E"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
+                className="[stroke-dasharray:420] [animation:leader-draw_1.4s_cubic-bezier(0.22,1,0.36,1)_0.6s_both]"
+              />
+            </svg>
+            <div className="absolute bottom-[15px] -translate-x-1/2 sm:translate-x-0 sm:bottom-auto sm:right-[70px] sm:top-[32px] whitespace-nowrap text-center sm:text-right [animation:fade-up_0.8s_ease-out_1.4s_both]">
+              {pct === 0 ? (
+                <span className="font-display italic text-base sm:text-xl text-[#141413]">
+                  <span className="hidden sm:inline">click</span>
+                  <span className="sm:hidden">tap</span> — clay to material
+                </span>
+              ) : pct < 95 ? (
+                <span className="font-mono-code text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#9A773E] tabular-nums">
+                  materialising · {pct}%
+                </span>
+              ) : (
+                <span className="flex items-baseline gap-3">
+                  <span className="font-display italic text-base sm:text-xl text-[#141413]">drag to turn it around</span>
+                  <button
+                    type="button"
+                    onClick={handleResetColor}
+                    onMouseEnter={() => onCursorChange?.('link')}
+                    onMouseLeave={() => onCursorChange?.('default')}
+                    className="pointer-events-auto inline-flex items-center gap-1 font-mono-code text-[10px] uppercase tracking-[0.2em] text-[#7A7770] hover:text-[#9A773E] transition-colors"
+                    title="Back to the clay study model"
+                  >
+                    <RotateCcw className="w-3 h-3" /> clay
+                  </button>
+                </span>
               )}
             </div>
           </div>
@@ -119,14 +133,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               </p>
             </div>
           </div>
-
-          {/* Floating Visual Prompt before interaction */}
-          {pct === 0 && (
-            <div className="absolute right-8 md:right-24 bottom-24 z-10 pointer-events-none hidden sm:flex items-center gap-2 bg-[#141413]/85 backdrop-blur-md text-[#FAF9F5] px-4 py-2 rounded-full text-xs font-mono-code border border-[#3E3D3A] shadow-lg animate-pulse">
-              <span className="text-[#D8A46B]">✦</span>
-              <span>Click anywhere on 3D model to rotate & materialize</span>
-            </div>
-          )}
 
           {/* Bottom Bar: Minimal Scroll Prompt */}
           <div className="relative z-10 flex items-end justify-end pointer-events-none pb-2">

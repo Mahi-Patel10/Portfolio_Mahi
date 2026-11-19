@@ -135,7 +135,7 @@ export default function App() {
         break;
       case 'work-detail':
         if ('slug' in route && (route.slug === 'urben-hatch' || route.slug === 'urbenhatch')) {
-          document.title = 'URBEN HATCH — Adaptive Reuse Hostel Hotel — Mahi Patel';
+          document.title = 'URBAN HATCH — Adaptive Reuse Hostel Hotel — Mahi Patel';
         } else if ('slug' in route && route.slug === 'villa') {
           document.title = 'Villa — Residential Interior Design — Mahi Patel';
         } else if ('slug' in route && route.slug === 'miscellaneous') {

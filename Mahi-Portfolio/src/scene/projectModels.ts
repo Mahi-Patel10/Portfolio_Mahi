@@ -649,7 +649,7 @@ export function createStageLighting(renderer: THREE.WebGLRenderer, scene: THREE.
 }
 
 // ---------------------------------------------------------------------------
-// 01 — Urben Hatch (Adaptive reuse of a colonial-era school into a hostel)
+// 01 — Urban Hatch (Adaptive reuse of a colonial-era school into a hostel)
 // ---------------------------------------------------------------------------
 function buildUrbenHatch(): BuiltModel {
   const k = new Kit();

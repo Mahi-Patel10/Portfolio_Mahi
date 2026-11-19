@@ -17,7 +17,7 @@ const HATCH_BG = '[background:repeating-linear-gradient(45deg,#EFE6D8_0_1px,tran
 
 /** Title-case names for the plan (the project data stores some in capitals). */
 const PROJECT_LABELS: Record<string, string> = {
-  'urben-hatch': 'Urben Hatch',
+  'urben-hatch': 'Urban Hatch',
   'royce-store': 'Royce’',
   villa: 'Villa',
   miscellaneous: 'Miscellaneous',

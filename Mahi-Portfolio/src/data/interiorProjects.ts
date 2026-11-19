@@ -298,7 +298,7 @@ export const INTERIOR_PROJECTS: Project[] = [
   {
     id: 'hosp-urben-hatch',
     slug: 'urben-hatch',
-    title: 'URBEN HATCH — Adaptive Reuse Hostel Hotel',
+    title: 'URBAN HATCH — Adaptive Reuse Hostel Hotel',
     category: 'hospitality',
     location: 'Old City, Ahmedabad, India',
     year: '2024',

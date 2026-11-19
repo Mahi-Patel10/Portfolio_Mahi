@@ -68,11 +68,11 @@ const TECHNICAL_DRAWINGS = [
     id: 'sheet-01-concept',
     number: '01',
     category: 'plans',
-    title: 'Sheet 01 · URBEN HATCH — Hospitality Design & Adaptive Reuse Concept',
+    title: 'Sheet 01 · URBAN HATCH — Hospitality Design & Adaptive Reuse Concept',
     scale: 'Concept & Macro Analysis',
     src: '/projects/urben-hatch/sheet-01-concept.jpg',
     caption:
-      'Introductory concept sheet for Urben Hatch: historic R.C. High School of Commerce context in Old City Ahmedabad, hostel hotel typology, adaptive reuse design objectives, light analysis, major axial corridors, layout zoning, and functional connectivity between public, service, and guest accommodations.',
+      'Introductory concept sheet for Urban Hatch: historic R.C. High School of Commerce context in Old City Ahmedabad, hostel hotel typology, adaptive reuse design objectives, light analysis, major axial corridors, layout zoning, and functional connectivity between public, service, and guest accommodations.',
     highlights: ['Old City Ahmedabad Context', 'Hostel Hotel Typology', 'Light & Solar Analysis', 'Bubble Connectivity Matrix'],
   },
   {
@@ -255,7 +255,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
             {/* Title Block */}
             <div className="space-y-3">
               <h1 className="font-display font-light text-[clamp(2rem,min(9vw,11vh),8rem)] tracking-tight text-[#141413] leading-[0.92] whitespace-nowrap">
-                URBEN HATCH
+                URBAN HATCH
               </h1>
               <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-[#9A773E] tracking-wide">
                 Hospitality Design · Adaptive Reuse
@@ -320,7 +320,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
             <div className="max-w-4xl">
               <div className="space-y-6 text-[#141413]">
                 <p className="font-serif italic text-lg sm:text-xl md:text-2xl leading-relaxed text-[#2C2926]">
-                  “Urben Hatch reimagines the historic R.C. High School of Commerce not as a static museum relic, but as an active, living infrastructure that bridges Old City heritage with the energetic lifestyle of students, creative interns, and global travelers.”
+                  “Urban Hatch reimagines the historic R.C. High School of Commerce not as a static museum relic, but as an active, living infrastructure that bridges Old City heritage with the energetic lifestyle of students, creative interns, and global travelers.”
                 </p>
                 <div className="w-12 h-px bg-[#B35446]" />
                 <p className="font-display font-light text-base sm:text-lg leading-relaxed text-[#5C5751]">
@@ -565,7 +565,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
             <div className="flex items-center justify-between pb-4 border-b border-white/10 shrink-0">
               <div className="pr-4">
                 <span className="font-mono-code text-[11px] text-[#C83E34] uppercase tracking-widest block">
-                  URBEN HATCH Architectural Drawing Dossier
+                  URBAN HATCH Architectural Drawing Dossier
                 </span>
                 <h3 className="font-display text-lg sm:text-xl text-white truncate max-w-xl sm:max-w-2xl">
                   {lightboxImage.title}
